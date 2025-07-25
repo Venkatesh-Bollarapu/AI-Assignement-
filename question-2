@@ -1,0 +1,29 @@
+def r1():
+    q = [("LLL_RRR", [])]
+    v = set()
+    while q:
+        x, p = q.pop(0)
+        if x == "RRR_LLL":
+            print(p)
+            return
+        if x in v: continue
+        v.add(x)
+        for i in range(7):
+            if x[i] == "_":
+                if i > 0 and x[i-1] == "L":
+                    t = list(x)
+                    t[i], t[i-1] = t[i-1], t[i]
+                    q.append(("".join(t), p+[x]))
+                if i > 1 and x[i-2] == "L" and x[i-1] == "R":
+                    t = list(x)
+                    t[i], t[i-2] = t[i-2], t[i]
+                    q.append(("".join(t), p+[x]))
+                if i < 6 and x[i+1] == "R":
+                    t = list(x)
+                    t[i], t[i+1] = t[i+1], t[i]
+                    q.append(("".join(t), p+[x]))
+                if i < 5 and x[i+2] == "R" and x[i+1] == "L":
+                    t = list(x)
+                    t[i], t[i+2] = t[i+2], t[i]
+                    q.append(("".join(t), p+[x]))
+r1()
